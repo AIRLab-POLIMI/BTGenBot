@@ -1,0 +1,18 @@
+<package format="3">
+	<name>bt_client</name>
+	<version>0.1.0</version>
+	<description>ROS2 package for navigation and control of a robot using LLM-generated behavior trees</description>
+	<maintainer email="riccardo.izzo@mail.polimi.it">Riccardo Andrea Izzo</maintainer>
+	<license>MIT</license>
+	<author email="riccardo.izzo@mail.polimi.it">Riccardo Andrea Izzo</author>
+
+	<buildtool_depend>ament_cmake</buildtool_depend>
+	<depend>behaviortree_cpp</depend>
+	<depend>behaviortree_ros2</depend>
+	<depend>btcpp_ros2_interfaces</depend>
+	<depend>std_msgs</depend>
+	<export>
+		<build_type>ament_cmake</build_type>
+	</export>
+
+</package>

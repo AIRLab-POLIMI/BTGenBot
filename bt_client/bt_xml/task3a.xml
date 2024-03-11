@@ -1,0 +1,20 @@
+<!-- Navigation with fallback when a location is unrechable (timeout version) -->
+<!-- 
+    Visit these locations in sequence: Station A, Station B, Station C, Parking 
+    If more that 30s have passed skip to the next location
+-->
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence>
+            <ForceSuccess>
+                <MoveToWithTimeout name="go_to_point_A" location="Point A"/>      <!-- move to Point A -->
+            </ForceSuccess>
+            <ForceSuccess>
+                <MoveToWithTimeout name="go_to_point_B" location="Point B"/>      <!-- move to Point B -->
+            </ForceSuccess>
+            <ForceSuccess>
+                <MoveToWithTimeout name="go_to_point_C" location="Point C"/>      <!-- move to Point C -->
+            </ForceSuccess>
+        </Sequence>
+    </BehaviorTree>
+</root>

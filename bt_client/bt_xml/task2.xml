@@ -1,0 +1,15 @@
+<!-- Navigation with priority -->
+<!-- 
+    Visit these locations in sequence giving priotity to the ones with a threshold above the value of 15: 
+    Station A (16), Station B (23), Station D (9), Parking (0) 
+-->
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence>
+            <MoveTo name="go_to_station_B" location="Station B"/>      <!-- move to Station B -->
+            <MoveTo name="go_to_station_A" location="Station A"/>      <!-- move to Station A -->
+            <MoveTo name="go_to_station_D" location="Station D"/>      <!-- move to Station D -->
+            <MoveTo name="go_to_parking"   location="Parking"/>        <!-- move to Parking -->
+        </Sequence>
+    </BehaviorTree>
+</root>

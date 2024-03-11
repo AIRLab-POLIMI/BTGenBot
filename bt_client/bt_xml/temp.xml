@@ -1,0 +1,12 @@
+ <root BTCPP_format="4">
+     <BehaviorTree>
+        <Sequence>
+            <MoveTo name="go_to_station_A" location="Station A"/>      <!-- move to Station A and pick Component A -->
+            <MoveTo name="go_to_station_B" location="Station B"/>      <!-- move to Station B and pick Component B -->
+            <MoveTo name="go_to_station_C" location="Station C"/>      <!-- move to Station C and deliver Component A and B -->
+            <MoveTo name="go_to_station_D" location="Station D"/>      <!-- move to Station D and activate the assembly process -->
+            <MoveTo name="go_to_station_C" location="Station C"/>      <!-- move to Station C and collect the final product -->
+            <MoveTo name="go_to_parking"   location="Parking"/>        <!-- move to Parking and deliver the product -->
+        </Sequence>
+     </BehaviorTree>
+ </root>

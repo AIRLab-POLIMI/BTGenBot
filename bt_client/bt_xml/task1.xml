@@ -1,0 +1,12 @@
+<!-- Navigation -->
+<!-- Visit these locations in sequence: Station A, Station B, Station C, Parking -->
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence>
+            <MoveTo name="go_to_station_A" location="Station A"/>      <!-- move to Station A -->
+            <MoveTo name="go_to_station_B" location="Station B"/>      <!-- move to Station B -->
+            <MoveTo name="go_to_station_C" location="Station C"/>      <!-- move to Station C -->
+            <MoveTo name="go_to_parking"   location="Parking"/>        <!-- move to Parking -->
+        </Sequence>
+    </BehaviorTree>
+</root>

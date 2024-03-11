@@ -1,0 +1,12 @@
+<!-- Exploration of an environment until complete coverage -->
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <RetryUntilSuccessful num_attempts="5">
+            <Sequence>
+                    <GenerateNextDestination new_goal="{goal}"/>
+                    <MoveTo location="{goal}"/>
+                    <isExplorationComplete location="{goal}"/>
+            </Sequence>
+        </RetryUntilSuccessful>
+    </BehaviorTree>  
+</root>

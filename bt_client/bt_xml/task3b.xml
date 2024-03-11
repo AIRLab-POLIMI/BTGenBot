@@ -1,0 +1,24 @@
+<!-- Navigation with fallback when a location is unrechable (isGoalReachable version) -->
+<!-- 
+    Visit these locations in sequence: Station A, Station B, Parking 
+    While moving to the location check if it is reachable, if not skip immediately to the next one
+-->
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence> 
+            <ForceSuccess>
+                <Parallel success_count="2" failure_count="1">                 <!-- return SUCCESS if both subtasks return SUCCESS  -->
+                    <isGoalReachable prob="1.0"/>                              <!-- task that will succeed with 100% probability  -->
+                    <MoveTo name="go_to_station_A" location="Station A"/>      <!-- move to Station A  -->
+                </Parallel>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Parallel success_count="2" failure_count="1">
+                    <isGoalReachable prob="0.3"/>                              <!-- task that will succeed with 30% probability  -->
+                    <MoveTo name="go_to_station_B" location="Station B"/>      <!-- move to Station B  -->
+                </Parallel>
+            </ForceSuccess>
+            <MoveTo name="go_to_parking"   location="Parking"/>                <!-- move to Parking -->
+        </Sequence>
+    </BehaviorTree>
+</root>
