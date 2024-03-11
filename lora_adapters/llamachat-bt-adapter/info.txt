@@ -1,0 +1,5 @@
+--batch_size 256
+--micro_batch_size 4
+--cutoff_len 2048
+
+loss: 0.0800 - epoch: 75.29
