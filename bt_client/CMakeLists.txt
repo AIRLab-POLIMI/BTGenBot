@@ -38,6 +38,7 @@ add_executable(client
   src/GenerateNextDestination.cpp
   src/isExplorationComplete.cpp
   src/FollowAruco.cpp
+  src/MoveManipulator.cpp
 )
 ament_target_dependencies(client ${THIS_PACKAGE_DEPS}) 
 target_link_libraries(client ${YAML_CPP_LIBRARIES})

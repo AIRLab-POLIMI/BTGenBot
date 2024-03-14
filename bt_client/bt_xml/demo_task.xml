@@ -1,0 +1,18 @@
+<!-- Navigation with arm activity -->
+<!-- 
+    Go to the Aruco Stand, follow the arucos with ids 10, 1 and 7.
+    Then move the manipulator to the parked configuration and go to Parking.
+-->
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence>
+            <MoveTo name="go_to_aruco_stand" location="Aruco Stand"/>   <!-- move to Aruco Stand -->
+            <MoveManipulator state="stand"/>                             <!-- move manipulator given the joint configuration -->
+            <FollowAruco id="10"/>                                      <!-- follow aruco given the id -->
+            <FollowAruco id="1"/>                                       <!-- follow aruco given the id -->
+            <FollowAruco id="7"/>                                       <!-- follow aruco given the id -->     
+            <MoveManipulator state="parked"/>                            <!-- move manipulator given the joint configuration -->
+            <MoveTo name="go_to_parking" location="Parking"/>           <!-- move to Parking -->
+        </Sequence>
+    </BehaviorTree>
+</root>

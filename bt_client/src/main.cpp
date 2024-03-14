@@ -19,12 +19,13 @@
 #include "GenerateNextDestination.hpp"
 #include "isExplorationComplete.hpp"
 #include "FollowAruco.hpp"
+#include "MoveManipulator.hpp"
 
 // Define the directory for behavior tree XML files
 const std::string bt_xml_dir = ament_index_cpp::get_package_share_directory("bt_client") + "/bt_xml";
 
 // Select here the behavior tree
-const std::string tree_xml = "/task6.xml";
+const std::string tree_xml = "/demo_task.xml";
 
 /**
  * @brief Main function for the behavior tree client node
@@ -39,12 +40,12 @@ int main(int argc, char **argv)
 
     BehaviorTreeFactory factory;
 
-    auto node = std::make_shared<rclcpp::Node>("bt_client_node");
+    auto main_node = std::make_shared<rclcpp::Node>("bt_client_node");
 	// Declare a parameter for the location file with a default value of "none"
-    node->declare_parameter("location_file","none");
+    main_node->declare_parameter("location_file","none");
 
     RosNodeParams params; 
-    params.nh = node;
+    params.nh = main_node;
     params.default_port_value = "/navigate_to_pose";
 
     // Register the custom MoveTo node type with the BehaviorTreeFactory
@@ -69,6 +70,14 @@ int main(int argc, char **argv)
 
     // Register the custom FollowAruco node type with the BehaviorTreeFactory
     factory.registerNodeType<FollowAruco>("FollowAruco", aruco_params);
+
+    auto manipulator_node = std::make_shared<rclcpp::Node>("bt_manipulator_client_node");
+    RosNodeParams manipulator_params; 
+    manipulator_params.nh = manipulator_node;
+    manipulator_params.default_port_value = "/manipulator";
+
+    // Register the custom ResetManipulator node type with the BehaviorTreeFactory
+    factory.registerNodeType<MoveManipulator>("MoveManipulator", manipulator_params);
 
     // Create a behavior tree from an XML file located in the specified directory
     auto tree = factory.createTreeFromFile(bt_xml_dir + tree_xml);
