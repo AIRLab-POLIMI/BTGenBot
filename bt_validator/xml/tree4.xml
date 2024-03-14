@@ -1,0 +1,32 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <SubTree ID="TheTree" />
+                <Done/>
+            </Sequence>
+            <Fail />
+        </Fallback>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TheTree">
+        <Sequence>
+            <Sequence>
+                <MoveTo x="0" y="0"/>
+                <ActivateManipulator/>
+            </Sequence>
+            <Sequence>
+                <MoveTo x="1" y="1"/>
+                <ActivateManipulator/>
+            </Sequence>
+            <Sequence>
+                <MoveTo x="2" y="2"/>
+                <ActivateManipulator/>
+            </Sequence>
+            <Sequence>
+                <MoveTo x="3" y="3"/>
+                <ActivateManipulator/>
+            </Sequence>
+        </Sequence>
+     </BehaviorTree>  
+</root>

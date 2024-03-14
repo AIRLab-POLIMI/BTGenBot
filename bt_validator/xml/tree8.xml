@@ -1,0 +1,22 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <SubTree ID="TheTree" />
+                <Done/>
+            </Sequence>
+            <Fail />
+        </Fallback>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TheTree">
+        <SequenceWithMemory>
+            <PressButton label="Button R"/>
+            <PressButton label="Button P"/>
+            <Sequence>
+                <EvaluateProcessing/>
+            </Sequence>
+            <PressButton label="Button C"/>
+        </SequenceWithMemory>
+     </BehaviorTree>  
+</root>

@@ -1,0 +1,34 @@
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence>
+            <Fallback>
+                <Sequence>
+                    <MoveTo location="Station A"/>
+                    <Pick from="station" item="Component A"/>
+                    <Drop to="tray"/>
+                    <MoveTo location="Station B"/>
+                    <Pick from="station" item="Component B"/>
+                    <Drop to="tray"/>
+                    <MoveTo location="Station C"/>
+                    <Pick from="tray" item="Component A"/>
+                    <Drop to="station"/>
+                    <Pick from="tray" item="Component B"/>
+                    <Drop to="station"/>
+                    <MoveTo location="Station D"/>
+                    <ActivateProcess/>
+                    <MoveTo location="Station C"/>
+                    <Pick from="station" item="Finished product"/>
+                    <Drop to="tray"/>
+                    <MoveTo location="Park"/>
+                    <Pick from="tray" item="Finished product"/>
+                    <Drop to="station"/>
+                </Sequence>
+                <Sequence>
+                    <MoveTo location="Park"/>
+                    <EmptyTray/>
+                </Sequence>
+            </Fallback>
+            <Done />
+        </Sequence>
+    </BehaviorTree>
+</root>

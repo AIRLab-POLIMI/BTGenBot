@@ -1,0 +1,30 @@
+<root BTCPP_format="4"  main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <SubTree ID="TheTree" />
+                <SubTree ID="TheTree" />
+                <Done/>
+            </Sequence>
+            <Fail />
+        </Fallback>
+    </BehaviorTree>
+    
+    <BehaviorTree ID="TheTree">
+        <Fallback>
+            <Sequence>
+                <RetryUntilSuccessful num_attempts="5">
+                    <Sequence>
+                        <PerformObservation />
+                        <EstimateGrasp />
+                    </Sequence>
+                </RetryUntilSuccessful>
+                <Pick />
+                <MoveToDropPosition />
+                <Drop />
+                <MoveToRestPosition />
+            </Sequence>
+            <MoveToRestPosition />
+        </Fallback>
+     </BehaviorTree>  
+</root>

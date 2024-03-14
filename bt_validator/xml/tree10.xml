@@ -1,0 +1,21 @@
+<root BTCPP_format="4">
+    <BehaviorTree>
+        <Sequence>
+            <Fallback>
+                <Sequence>
+                    <ActionA/>
+                    <ActionB/>
+                    <ActionC/>
+                </Sequence>
+                <Sequence>
+                    <ActionA/>
+                    <Fallback>
+                        <ActionB/>
+                        <ActionD/>
+                    </Fallback>
+                </Sequence>
+            </Fallback>
+            <Done />
+        </Sequence>
+    </BehaviorTree>
+</root>

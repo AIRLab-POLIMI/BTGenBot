@@ -1,0 +1,23 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <RetryUntilSuccessful num_attempts="10">
+                    <SubTree ID="TheTree" />
+                </RetryUntilSuccessful>
+                <Done />
+            </Sequence>
+            <Fail />
+        </Fallback>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TheTree">
+        <Sequence>
+            <Sequence>
+                <MoveToNewConfiguration />
+                <CheckForTarget />
+            </Sequence>
+            <ApproachTarget />
+        </Sequence>
+    </BehaviorTree>
+</root>

@@ -1,0 +1,21 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <RetryUntilSuccessful num_attempts="10">
+                    <SubTree ID="TheTree" />
+                </RetryUntilSuccessful>
+                <Done/>
+            </Sequence>
+            <Fail />
+        </Fallback>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TheTree">
+        <Sequence>
+            <GenerateNextDestination/>
+            <MoveToDestination/>
+            <CheckForExplorationComplete/>
+        </Sequence>
+     </BehaviorTree>  
+</root>
