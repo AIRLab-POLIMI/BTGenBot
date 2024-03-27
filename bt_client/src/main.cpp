@@ -11,6 +11,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
 #include "behaviortree_ros2/plugins.hpp"
+#include <filesystem>
 #include "ament_index_cpp/get_package_share_directory.hpp"
 
 #include "MoveTo.hpp"
@@ -25,7 +26,7 @@
 const std::string bt_xml_dir = ament_index_cpp::get_package_share_directory("bt_client") + "/bt_xml";
 
 // Select here the behavior tree
-const std::string tree_xml = "/demo_task.xml";
+const std::string tree_xml = "/main_tree.xml";
 
 /**
  * @brief Main function for the behavior tree client node
@@ -78,6 +79,12 @@ int main(int argc, char **argv)
 
     // Register the custom ResetManipulator node type with the BehaviorTreeFactory
     factory.registerNodeType<MoveManipulator>("MoveManipulator", manipulator_params);
+
+    // Check if the file exists
+    if (!std::filesystem::exists(bt_xml_dir + tree_xml)) {
+        RCLCPP_ERROR(main_node->get_logger(), "Tree file %s does not exist!", tree_xml.c_str());
+        return 1;
+    }
 
     // Create a behavior tree from an XML file located in the specified directory
     auto tree = factory.createTreeFromFile(bt_xml_dir + tree_xml);

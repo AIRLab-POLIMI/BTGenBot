@@ -43,11 +43,18 @@ add_executable(client
 ament_target_dependencies(client ${THIS_PACKAGE_DEPS}) 
 target_link_libraries(client ${YAML_CPP_LIBRARIES})
 
+add_executable(bt_monitor
+  src/bt_monitor.cpp 
+)
+ament_target_dependencies(bt_monitor ${THIS_PACKAGE_DEPS}) 
+target_link_libraries(bt_monitor ${YAML_CPP_LIBRARIES})
+
 ######################################################
 # INSTALL
 
 install(TARGETS
   client
+  bt_monitor
   DESTINATION lib/${PROJECT_NAME}
 )
 
