@@ -4,3 +4,6 @@ bitsandbytes==0.41.0
 peft
 transformers>=4.31.0
 sentencepiece
+scp
+paramiko
+pyyaml

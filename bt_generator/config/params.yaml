@@ -1,0 +1,33 @@
+# SSH connection parameters
+host: "HOST_NAME"
+username: "USERNAME"
+password: "PASSWORD"
+
+# Local and remote directories
+tree_name: "main_tree.xml"
+local_dir: "/home/*/BTGenBot/bt_client/bt_xml/"
+remote_dir: "/home/*/storage"
+
+# Model and adapter paths
+model_id: "meta-llama/Llama-2-7b-chat-hf" #codellama/CodeLlama-7b-Instruct-hf
+adapter_id: "lora_adapters/llamachat-bt-adapter"
+
+# BT prompt
+context: >-
+  <<SYS>> You will be provided a summary of a task performed by a behavior tree, and your objective is to express this behavior tree in XML format.\n <</SYS>>
+
+example_task: >-
+  The behavior tree represents a robot's navigation system with arm activity. The robot must visit the location "Station A", then follow the aruco with ID=7. The only available actions that must be used in the behavior tree are: "MoveTo", "FollowAruco".
+
+example_output: >-
+  <root main_tree_to_execute = "MainTree" >
+    <BehaviorTree ID="MainTree">
+        <Sequence>
+            <MoveTo location="Station A"/>
+            <FollowAruco id="7"/>
+        </Sequence>
+    </BehaviorTree>
+  </root>
+
+task: >-
+  The behavior tree represents a robot's navigation system with arm activity. The robot must visit the location "ArucoStand", then follow the arucos given their IDs: 10, 1, and 7. Finally the robot reset the manipulator to the parking position and goes to the location "Parking". The only available actions that must be used in the behavior tree are: "MoveTo", "FollowAruco" and "ResetManipulator".
