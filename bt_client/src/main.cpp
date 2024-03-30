@@ -12,7 +12,6 @@
 #include "rclcpp_action/rclcpp_action.hpp"
 #include "behaviortree_ros2/plugins.hpp"
 #include <filesystem>
-#include "ament_index_cpp/get_package_share_directory.hpp"
 
 #include "MoveTo.hpp"
 #include "MoveToWithTimeout.hpp"
@@ -21,12 +20,6 @@
 #include "isExplorationComplete.hpp"
 #include "FollowAruco.hpp"
 #include "MoveManipulator.hpp"
-
-// Define the directory for behavior tree XML files
-const std::string bt_xml_dir = ament_index_cpp::get_package_share_directory("bt_client") + "/bt_xml";
-
-// Select here the behavior tree
-const std::string tree_xml = "/main_tree.xml";
 
 /**
  * @brief Main function for the behavior tree client node
@@ -37,6 +30,17 @@ const std::string tree_xml = "/main_tree.xml";
  */
 int main(int argc, char **argv)
 {
+    // Get the current directory
+    std::filesystem::path curr_dir = std::filesystem::current_path();
+    // Get the configuration file path
+    std::filesystem::path config_dir = curr_dir / "config/tree.yaml";
+    // Load the configuration file with the tree name
+    YAML::Node config_file = YAML::LoadFile(config_dir);
+
+    // Get the directory of the behavior tree XML file using the name from the configuration file
+    std::filesystem::path tree_dir = curr_dir / "bt_xml/";
+    std::string tree_xml = tree_dir.string() + config_file["tree_name"].as<std::string>();
+
     rclcpp::init(argc, argv);
 
     BehaviorTreeFactory factory;
@@ -81,13 +85,13 @@ int main(int argc, char **argv)
     factory.registerNodeType<MoveManipulator>("MoveManipulator", manipulator_params);
 
     // Check if the file exists
-    if (!std::filesystem::exists(bt_xml_dir + tree_xml)) {
+    if (!std::filesystem::exists(tree_xml)) {
         RCLCPP_ERROR(main_node->get_logger(), "Tree file %s does not exist!", tree_xml.c_str());
         return 1;
     }
 
     // Create a behavior tree from an XML file located in the specified directory
-    auto tree = factory.createTreeFromFile(bt_xml_dir + tree_xml);
+    auto tree = factory.createTreeFromFile(tree_xml);
 
     // Execute the behavior tree and tick while it is running
     tree.tickWhileRunning();

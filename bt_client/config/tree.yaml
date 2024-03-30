@@ -1,0 +1,2 @@
+# Select here the name of the behavior tree you want to run
+tree_name: "main_tree.xml"
