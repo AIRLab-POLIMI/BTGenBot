@@ -7,3 +7,4 @@ sentencepiece
 scp
 paramiko
 pyyaml
+PyQt5
