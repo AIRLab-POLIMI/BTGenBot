@@ -20,6 +20,8 @@ parameters in generating effective and efficient robot behaviors.
 Release for the paper **BTGenBot: Behavior Tree Generation for Robotic
 Tasks with Lightweight LLMs**, currently in submission at **IEEE/RSJ International Conference on Intelligent Robots and Systems**.
 
+Preprint available on arxiv: https://arxiv.org/abs/2403.12761
+
 [`Dataset`](https://huggingface.co/datasets/AIRLab-POLIMI/btgenbot), [`llama-2-7b-chat`](https://huggingface.co/AIRLab-POLIMI/llama-2-7b-chat-hf-btgenbot-adapter) and [`codellama-7b-instruct`](https://huggingface.co/AIRLab-POLIMI/codellama-7b-instruct-hf-btgenbot-adapter) LoRA adapters available on HuggingFace.
 
 **Authors**: [Riccardo Andrea Izzo](mailto:riccardo.izzo@mail.polimi.it), [Gianluca Bardaro](mailto:gianluca.bardaro@polimi.it) and [Matteo Matteucci](mailto:matteo.matteucci@polimi.it)  
@@ -126,4 +128,16 @@ source install/setup.bash
 - Launch the validator from the root directory
 ```
 ./build/bt_validator/main
+```
+
+## Citation
+If you use this work in your research, please consider citing our paper:
+
+```
+@article{izzo2024btgenbot,
+  title={BTGenBot: Behavior Tree Generation for Robotic Tasks with Lightweight LLMs},
+  author={Izzo, Riccardo Andrea and Bardaro, Gianluca and Matteucci, Matteo},
+  journal={arXiv preprint arXiv:2403.12761},
+  year={2024}
+}
 ```
