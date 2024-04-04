@@ -8,3 +8,4 @@ scp
 paramiko
 pyyaml
 PyQt5
+pathlib

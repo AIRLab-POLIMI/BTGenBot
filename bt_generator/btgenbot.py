@@ -11,7 +11,7 @@ from paramiko import SSHClient
 from scp import SCPClient
 import yaml
 import re
-
+from pathlib import Path
 
 class InputWindow(QWidget):
     # Define the GUI layout
@@ -86,7 +86,7 @@ class InputWindow(QWidget):
     # Generate the behavior tree with the model and send it to the remote location
     def generate(self, example_task, example_output, task):
         # Define the path to the YAML configuration file
-        config_file_path = 'bt_generator/config/params.yaml'
+        config_file_path = Path.home() / 'BTGenBot/bt_generator/config/params.yaml'
 
         # Load parameters from the YAML configuration file
         with open(config_file_path, 'r') as file:
@@ -139,7 +139,7 @@ class InputWindow(QWidget):
         matches = re.findall(pattern, result, re.DOTALL)
 
         # Define the path to the behavior tree XML file
-        root_dir = Path(__file__).parent / "../bt_client/bt_xml"
+        root_dir = Path.home() / "BTGenBot/bt_client/bt_xml"
         tree_xml = params.get("tree_name")
 
         # Check if the behavior tree was found
