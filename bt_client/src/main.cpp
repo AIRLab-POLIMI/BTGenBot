@@ -33,12 +33,12 @@ int main(int argc, char **argv)
     // Get the current directory
     std::filesystem::path curr_dir = std::filesystem::current_path();
     // Get the configuration file path
-    std::filesystem::path config_dir = curr_dir / "config/tree.yaml";
+    std::filesystem::path config_dir = curr_dir / "bt_client/config/tree.yaml";
     // Load the configuration file with the tree name
     YAML::Node config_file = YAML::LoadFile(config_dir);
 
     // Get the directory of the behavior tree XML file using the name from the configuration file
-    std::filesystem::path tree_dir = curr_dir / "bt_xml/";
+    std::filesystem::path tree_dir = curr_dir / "bt_client/bt_xml/";
     std::string tree_xml = tree_dir.string() + config_file["tree_name"].as<std::string>();
 
     rclcpp::init(argc, argv);
