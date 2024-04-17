@@ -1,0 +1,198 @@
+navigation_desc: >-
+  The behavior tree represents a mobile robot tasked to visit two locations: (7,1) and (4,8). The available actions are: "MoveTo".
+
+navigation: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+      <Sequence>
+        <MoveTo x="7" y="1"/>
+        <MoveTo x="4" y="8"/>
+      </Sequence>
+    </BehaviorTree>
+  </root>
+
+
+navigation_priority_desc: >-
+  The behavior tree represents a mobile robot tasked to visit a sequence of locations: ((0,0), (2,3), (4, 7), (5, 11)). 
+  Each location is associated with a reading: (10, 20, 13, 27). 
+  Location with a reading above 15 must be visited first. The available actions are: "MoveTo".
+
+navigation_priority: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+      <Sequence>
+        <MoveTo x="5" y="11" threshold="27"/>
+        <MoveTo x="2" y="3" threshold="20"/>
+        <MoveTo x="4" y="7" threshold="13"/>
+        <MoveTo x="0" y="0" threshold="10"/>
+      </Sequence>
+    </BehaviorTree>
+  </root>
+
+
+navigation_fallback_desc: >-
+  The behavior tree represents a mobile robot tasked to visit a sequence of locations: (0,0), (2,3), (4, 7), (5, 11). 
+  During the navigation a location may become unreachable, if this happens, skip it and move to the next one. 
+  The available actions are: "MoveTo", "isGoalReachable".
+
+navigation_fallback: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+        <Sequence> 
+            <ForceSuccess>
+                <Parallel success_count="2" failure_count="1">                
+                    <isGoalReachable/>                              
+                    <MoveTo x="0" y="0"/> 
+                </Parallel>
+            </ForceSuccess>
+            <ForceSuccess>
+                <Parallel success_count="2" failure_count="1">                
+                    <isGoalReachable/>                              
+                    <MoveTo x="2" y="3"/> 
+                </Parallel>
+            </ForceSuccess>         
+            <ForceSuccess>
+                <Parallel success_count="2" failure_count="1">                
+                    <isGoalReachable/>                              
+                    <MoveTo x="4" y="7"/> 
+                </Parallel>
+            </ForceSuccess>   
+            <ForceSuccess>
+                <Parallel success_count="2" failure_count="1">                
+                    <isGoalReachable/>                              
+                    <MoveTo x="5" y="11"/> 
+                </Parallel>
+            </ForceSuccess>
+        </Sequence>
+    </BehaviorTree>
+  </root>
+
+
+navigation_arm_activity_desc: >-
+  The behavior tree represents a mobile manipulator tasked to visit a location at (7,1). 
+  After reaching the location, the mobile manipulator activates the robotic arm. 
+  The available actions are: "moveTo", "ActivateManipulator".
+
+navigation_arm_activity: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+      <Sequence>
+        <MoveTo x="7" y="1"/>
+        <ActivateManipulator/>
+      </Sequence>
+    </BehaviorTree>
+  </root>
+
+
+exploration_desc: >-
+  The behavior tree represents a mobile robot tasked asked to explore an area. 
+  The available actions are: "GenerateNextDestination", "MoveTo", "isExplorationComplete".
+
+exploration: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+        <RetryUntilSuccessful num_attempts="5">
+            <Sequence>
+                    <GenerateNextDestination new_goal="{goal}"/>
+                    <MoveTo location="{goal}"/>
+                    <isExplorationComplete/>
+            </Sequence>
+        </RetryUntilSuccessful>
+    </BehaviorTree>  
+  </root>
+
+
+manipulator_exploration_desc: >-
+  The behavior tree represents a manipulator tasked to find and reach a target. 
+  The manipulator moves in different locations and check for the presence of a target object. 
+  When the target is found, approach it. 
+  The available actions are: "MoveTo", "CheckForTarget", "PickTarget".
+
+manipulator_exploration: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+        <RetryUntilSuccessful num_attempts="5">
+            <Sequence>
+                    <MoveTo location="{goal}"/>
+                    <CheckForTarget/>
+                    <PickTarget/>
+            </Sequence>
+        </RetryUntilSuccessful>
+    </BehaviorTree>  
+  </root>
+
+
+active_vision_picking_desc: >-
+  The behavior tree represents a manipulator tasked to perform a pick and place routine. 
+  The manipulator observe the item from multiple points of view and each time tries to estimate a grasp. 
+  If the systems fails to identify a grasp after five observations, the action fails and the arm return to a resting position.
+  When the grasp is successfully estimated, the manipulator moves to the "ready" state, picks the item and drop it to a predefined
+  location, a chest in this case. After the drop, the arm moves to a resting position. 
+  The available actions are:  "EstimateGrasp", "Pick", "Drop", "MoveManipulator".
+
+active_vision_picking: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+        <RetryUntilSuccessful num_attempts="5">
+            <Sequence>
+                <EstimateGrasp/>
+                <MoveManipulator state="ready"/>
+                <Pick object="item"/>
+                <Drop location="chest"/>
+                <MoveManipulator state="resting"/>
+            </Sequence>
+        </RetryUntilSuccessful>
+    </BehaviorTree>  
+  </root>
+
+
+material_processing_desc: >-
+  The behavior tree represents a manipulator tasked to push buttons in a specific sequence to transform raw materials into processed materials.
+  Use "Button R" to receive the raw materials. Use "Button P" to start the processing. Use "Button C" to complete the processing. 
+  The manipulator has to first receive the raw material, then start the processing, and finally complete the processing. 
+  The manipulator has to periodically check the status of the materials to decide when the processing is complete.
+  The available actions are: "PressButton", "EvaluateProcessing".
+
+material_processing: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+      <Parallel success_count="2" failure_count="1">                
+        <EvaluateProcessing/>                              
+        <Sequence>
+          <PressButton button="Button R"/>
+          <PressButton button="Button P"/>
+          <PressButton button="Button C"/>
+        </Sequence>
+      </Parallel>
+    </BehaviorTree>
+  </root>
+
+
+multi_station_assembly_desc: >-
+  The behavior tree represents a mobile manipulator tasked to move between multiple stations to assemble a product. 
+  The order of actions is the following. 
+  Start from parking position and move to "Station A". In "Station A" pick up "Component A" and put it on the robot tray. 
+  Move to "Station C" and deliver "Component A". Activate the assembly process.
+  Collect the finished product and put it in the robot tray. Deliver the finished product to the parking position. 
+  The available actions are: "moveTo", "Pick", "Drop", "ActivateProcess".
+
+multi_station_assembly: >-
+  <root BTCPP_format="4">
+    <BehaviorTree ID="main_tree">
+      <Sequence>
+        <MoveTo location="Station A"/>
+        <Pick from="Station A" item="Component A"/>
+        <Drop to="tray"/>
+        <MoveTo location="Station C"/>
+        <Pick from="tray" item="Component A"/>
+        <Drop to="Station C"/>
+        <ActivateProcess/>
+        <Pick from="Station C" item="Finished product"/>
+        <Drop to="tray"/>
+        <MoveTo location="Parking"/>
+        <Pick from="tray" item="Finished product"/>
+        <Drop to="Parking"/>
+      </Sequence>
+    </BehaviorTree>
+  </root>
+
