@@ -1,6 +1,6 @@
 # BTGenBot
 
-**Abstract** This paper presents a novel approach to generating
+This work presents a novel approach to generating
 behavior trees for robots using lightweight large language models
 (LLMs) with a maximum of 7 billion parameters. The study
 demonstrates that it is possible to achieve satisfying results with
