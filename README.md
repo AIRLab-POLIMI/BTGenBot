@@ -60,6 +60,7 @@ Required ROS2 dependencies:
 - `BehaviorTree.CPP`: available [here](https://github.com/BehaviorTree/BehaviorTree.CPP)
 - `BehaviorTree.ROS2`: available [here](https://github.com/BehaviorTree/BehaviorTree.ROS2)
 - `igus_rebel_commander`: available [here](https://github.com/AIRLab-POLIMI/ros2-igus-rebel), required only by `bt_client` for the task involving arucos and arm activity
+- `aruco_interfaces`: available [here](https://github.com/AIRLab-POLIMI/ros2-aruco-pose-estimation/tree/main/aruco_interfaces), required only by `bt_client` for the task involving arucos and arm activity
 
 Tested on a Linux computer with Ubuntu 22.04 and ROS2 Humble
 
