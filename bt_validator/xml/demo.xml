@@ -1,0 +1,23 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback>
+            <Sequence>
+                <SubTree ID="TheTree" />
+                <Done/>
+            </Sequence>
+            <Fail />
+        </Fallback>
+    </BehaviorTree>
+
+    <BehaviorTree ID="TheTree">
+            <Sequence>
+                <MoveTo location="Aruco Stand"/>
+                <MoveManipulator label="stand"/>
+                <FollowAruco id="10"/> 
+                <FollowAruco id="1"/> 
+                <FollowAruco id="7"/> 
+                <MoveManipulator label="parked"/>
+                <MoveTo location="Parking"/>               
+            </Sequence>
+     </BehaviorTree>  
+</root>

@@ -24,6 +24,7 @@
 #include "bt_test/pick_and_place.hpp"
 #include "bt_test/press_button.hpp"
 #include "bt_test/assembly.hpp"
+#include "bt_test/aruco_demo.hpp"
 
 using namespace std::chrono_literals;
 using namespace BT;
@@ -36,11 +37,14 @@ int main(int argc, char **argv)
     std::vector<std::pair<float, float>> locations = {{0.0, 0.0}, {1.0, 1.0}, {2.0, 2.0}, {3.0, 3.0}};
     std::vector<std::string> labels = {"Button R", "Button P", "Button C"};
     std::vector<float> values = {10, 16, 8, 21};
+    std::vector<std::string> nav_locations = {"Aruco Stand", "Parking"};
+    std::vector<std::string> manipulator_labels = {"stand", "parked"};
+    std::vector<std::string> aruco_ids = {"10", "1", "7"};
     bool done = false;
     int success_count = 0;
     int failure_count = 0;
 
-    for (int i = 1; i <= 9; i++)
+    for (int i = 1; i <= 10; i++)
     {
         BehaviorTreeFactory factory;
         Tree tree;
@@ -206,6 +210,15 @@ int main(int argc, char **argv)
                 return NodeStatus::SUCCESS; });
 
             tree = factory.createTreeFromFile("xml/tree9.xml");
+            break;
+        }
+        case 10:
+        {
+            factory.registerNodeType<T10::MoveTo>("MoveTo", std::make_shared<T10::Report>(nav_locations));
+            factory.registerNodeType<T10::MoveManipulator>("MoveManipulator", std::make_shared<T10::Report>(manipulator_labels));
+            factory.registerNodeType<T10::FollowAruco>("FollowAruco", std::make_shared<T10::Report>(aruco_ids));
+
+            tree = factory.createTreeFromFile("xml/demo.xml");
             break;
         }
         default:
