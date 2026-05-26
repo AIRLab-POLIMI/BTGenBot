@@ -23,6 +23,8 @@ Tasks with Lightweight LLMs**, published in **2024 IEEE/RSJ International Confer
 Preprint available on arxiv: https://arxiv.org/abs/2403.12761  
 Paper: https://ieeexplore.ieee.org/document/10802304  
 
+⭐ BTGenBot-2 is here! Check it out: https://airlab-polimi.github.io/BTGenBot-2/  
+
 [`Dataset`](https://huggingface.co/datasets/AIRLab-POLIMI/btgenbot), [`llama-2-7b-chat`](https://huggingface.co/AIRLab-POLIMI/llama-2-7b-chat-hf-btgenbot-adapter) and [`codellama-7b-instruct`](https://huggingface.co/AIRLab-POLIMI/codellama-7b-instruct-hf-btgenbot-adapter) LoRA adapters available on HuggingFace.
 
 **Authors**: [Riccardo Andrea Izzo](mailto:riccardo.izzo@mail.polimi.it), [Gianluca Bardaro](mailto:gianluca.bardaro@polimi.it) and [Matteo Matteucci](mailto:matteo.matteucci@polimi.it)  
